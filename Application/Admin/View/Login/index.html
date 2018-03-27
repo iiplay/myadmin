@@ -1,100 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
-
-
-<!-- Mirrored from www.zi-han.net/theme/hplus/login_v2.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 03 Mar 2016 12:30:00 GMT -->
+<html lang="en" style="height: 100%">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-    <title>H+ 后台主题UI框架 - 登录</title>
-    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
-    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
-    <link href="__PUBLIC__/Admin/css/bootstrap.min.css" rel="stylesheet">
-    <link href="__PUBLIC__/Admin/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="__PUBLIC__/Admin/css/animate.min.css" rel="stylesheet">
-    <link href="__PUBLIC__/Admin/css/style.min.css" rel="stylesheet">
-    <link href="__PUBLIC__/Admin/css/login.min.css" rel="stylesheet">
-	<script type="text/javascript" src="__PUBLIC__/Admin/layer/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/Admin/layer/jquery.form.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/Admin/layer/layer.js"></script>
-    <!--[if lt IE 9]>
-    <meta http-equiv="refresh" content="0;ie.html" />
-    <![endif]-->
-    <script>
-        if(window.top!==window.self){window.top.location=window.location};
-    </script>
-	
-	    <script type="text/javascript">
-        $(function(){
-            var optinos = {
-                url: "{:U('Login/cheklogin')}",
-                type: "post",
-                dataType:'json',
-                error:function(){
-                            layer.msg('无法访问数据库，请检查你的数据库配置',function(){})
-                        },
-                success:function(res){
-                    if(res.error==1){
-                        layer.msg(res.msg);
-                        $('#loging').html("<button class='btn btn-warning btn-block'>重新登陆</button>")
-                    }else if(res.error == 2){
-                        layer.msg(res.msg);
-                        $('#loging').html("<button class='btn btn-info btn-block'>重新登陆</button>")
-                    }else{
-                        layer.msg(res.msg);
-                        setTimeout(function(){window.location=res.url;},2000);
-                        $('#loging').html("<button class='btn btn-danger btn-block'>正在登陆</button>")
-                    }
-                }
-            };
-            $('#doLogin').ajaxForm(optinos);
-        });
-    </script>
-
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="__LAYUI__/css/layui.css">
+    <link rel="stylesheet" href="__CSS__/base.css">
 </head>
-
-<body class="signin">
-    <div class="signinpanel">
-        <div class="row">
-            <div class="col-sm-7">
-                <div class="signin-info">
-                    <div class="logopanel m-b">
-                        <h1>[ H+ ]</h1>
-                    </div>
-                    <div class="m-b"></div>
-                    <h4>欢迎使用 <strong>H+ 后台主题UI框架</strong></h4>
-                    <ul class="m-b">
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势一</li>
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势二</li>
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势三</li>
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势四</li>
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势五</li>
-                    </ul>
-                    <strong>还没有账号？ <a href="#">立即注册&raquo;</a></strong>
+<body class="login-page" style="height:100%;">
+<!-- particles.js container -->
+<div id="particles-js" style="height:100%;"></div>
+<div class="login-box">
+    <div class="login-logo"><a href="#" style="color: #fff">Myadmin</a></div>
+    <div class="login-box-body">
+        <p class="login-box-msg">请填写用户名密码登陆系统</p>
+        <form action="/admin/login/checklogin" method="POST" onsubmit="return false" >
+            <div class="layui-form-item">
+                <input type="text" name="username" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-item">
+                <input type="password" name="password" required  lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <input type="text" name="code" required lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <img src="{:captcha_src()}" alt="captcha" id="code"
+                         onclick="this.src='{:captcha_src()}?rnd=' + Math.random();"/>
                 </div>
             </div>
-            <div class="col-sm-5">
-                <form method="post" action="" id="doLogin">
-                    <h4 class="no-margins">登录：</h4>
-                    <p class="m-t-md">登录到H+后台主题UI框架</p>
-                    <input type="text" class="form-control uname" placeholder="用户名" name="user"/>
-                    <input type="password" class="form-control pword m-b" placeholder="密码" name="pass"/>
-                    <a href="#">忘记密码了？</a>
-                    <span id="loging">
-						<button class="btn btn-success btn-block">登录</button>
-					</span>
-                </form>
+
+            <div class="layui-row">
+                <div class="layui-col-md4 layui-col-md-offset8">
+                    <button class="layui-btn login" type="submit">登录</button>
+                </div>
             </div>
-        </div>
-        <div class="signup-footer">
-            <div class="pull-left">
-                &copy; 2015 All Rights Reserved. H+
-            </div>
-        </div>
+        </form>
     </div>
+</div>
+
+<script type="text/javascript" src="__JS__/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="__JS__/jquery.form.js"></script>
+<script type="text/javascript" src="__LAYUI__/layui.js"></script>
+<script type="text/javascript" src="__JS__/particles.js"></script>
+<script type="text/javascript" src="__JS__/app.js"></script>
+<script type="application/javascript">
+    /**
+     * login
+     */
+    $(function(){
+        //登陆
+        layui.use('layer', function() {
+            var layer = layui.layer;
+            $('body').off('click', '.login');
+            $('body').on("click", '.login', function(event){
+                var _this = $(this);
+                var form = _this.closest('form');
+                if(form.length){
+                    var ajax_option={
+                        dataType:'json',
+                        beforeSend:function(XMLHttpRequest){
+                            layer.load(2);
+                        },
+                        success:function(data){
+                            layer.closeAll();
+                            if(data.status == '1'){
+                                layer.msg(data.info, {icon: 1,time: 2000});
+                                setTimeout(function(){
+                                    var url = data.url;
+                                    window.location.href = url;
+                                },2000);
+                            }else{
+                                layer.msg(data.info, {icon: 1,time: 2000});
+                                $('#code').click();
+                            }
+                        }
+                    }
+                    form.ajaxSubmit(ajax_option);
+                }
+            });
+        });
+    })
+
+
+</script>
+
 </body>
-
-
-<!-- Mirrored from www.zi-han.net/theme/hplus/login_v2.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 03 Mar 2016 12:30:01 GMT -->
 </html>

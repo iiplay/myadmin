@@ -1,0 +1,75 @@
+{include file="public/header" /}
+<!-- 内容主体区域 -->
+<div class="layui-row">
+    <div class="layui-col-xs12">
+        <div class="w_bg" style="padding: 15px">
+            <a href="/admin/user/create" class="layui-btn" >
+                <i class="layui-icon">&#xe608;</i> 新增
+            </a>
+            <button data-url="/admin/user/delete" class="layui-btn delete-all" >
+                <i class="layui-icon">&#xe608;</i> 删除
+            </button>
+            <form class="layui-form" action="">
+                <table class="layui-table">
+                    <thead>
+                    <tr>
+                        <th><input type="checkbox" lay-filter="allChoose" lay-skin="primary"></th>
+                        <th>ID</th>
+                        <th>头像</th>
+                        <th>用户名</th>
+                        <th>姓名</th>
+                        <th>邮箱</th>
+                        <th>手机号码</th>
+                        <th>登陆次数</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {volist name="dataList" id="vo"}
+                    <tr>
+                        <td><input name="id[]" value="{$vo.id}" type="checkbox"  lay-skin="primary" ></td>
+                        <td>{$vo.id}</td>
+                        <td><img src="{$vo->userInfo->avatar}" style="width:50px;border-radius:50%;" /></td>
+                        <td>
+                            {$vo.username}
+                            {volist name="vo.userGroup" id="vo2"}
+                            <span class="layui-badge" style="background:{$vo2.pic}">{$vo2.title}</span>
+                            {/volist}
+                        </td>
+                        <td>
+                            <span class="editable" data-pk="{$vo.id}" data-name="name" data-url="{:url(CONTROLLER_NAME.'/edit', 'id='.$vo['id'])}" >{$vo.name}</span>
+                        </td>
+                        <td>{$vo.email}</td>
+                        <td>{$vo.moblie}</td>
+                        <td>{$vo.logins}</td>
+                        <td>
+                            <a href="javascript:void(0);" data-id="{$vo.id}" data-field="status"
+                                                           data-value="{$vo.status}" data-url="{:url('edit', 'id='.$vo['id'])}">
+                            {if condition=" $vo.status == 1 "}
+                            <i class="layui-icon" style="color: #5FB878;font-size: 20px">&#xe616;</i>
+                            {else /}
+                            <i class="layui-icon" style="color: #FF5722;font-size: 22px">&#x1007;</i>
+                            {/if}
+                        </a>
+                        </td>
+                        <td>
+                            <a href="/admin/user/authgroup/id/{$vo.id}" class="layui-btn layui-btn-normal layui-btn-mini" >
+                                <i class="layui-icon">&#xe642;</i> 授权角色
+                            </a>
+                            <a href="/admin/user/edit/id/{$vo.id}" class="layui-btn layui-btn-normal layui-btn-mini" >
+                                <i class="layui-icon">&#xe642;</i> 编辑
+                            </a>
+                            <a href="javascript:void(0);" data-id="{$vo.id}" data-url="/admin/user/delete" class="layui-btn layui-btn-danger layui-btn-mini delete-one" >
+                                <i class="layui-icon">&#xe640;</i> 删除
+                            </a>
+                        </td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}

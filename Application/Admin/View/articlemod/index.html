@@ -1,0 +1,85 @@
+{include file="public/header" /}
+<!-- 内容主体区域 -->
+<div class="layui-row">
+    <div class="layui-col-xs12">
+        <div class="w_bg" style="padding: 15px">
+            <a href="/admin/articlemod/create" class="layui-btn" >
+                <i class="layui-icon">&#xe608;</i> 新增
+            </a>
+            <a href="javascript:void(0);" data-url="/admin/articlemod/delete" class="layui-btn delete-all" >
+                <i class="layui-icon">&#xe608;</i> 删除
+            </a>
+            <form class="layui-form" action="">
+                <table class="layui-table" lay-skin="nob">
+                    <thead>
+                    <tr>
+                        <th><input type="checkbox" lay-filter="allChoose" lay-skin="primary"></th>
+                        <th>ID</th>
+                        <th>文章模型名称</th>
+                        <th>文章模型操作</th>
+                        <th>状态</th>
+                        <th>排序</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {volist name="dataList" id="vo"}
+                    <tr>
+                        <td><input name="id[]" value="{$vo.id}" type="checkbox"  lay-skin="primary" ></td>
+                        <td>{$vo.id}</td>
+                        <td>{$vo.name}</td>
+                        <td>{$vo.mod}</td>
+                        <td>
+                            <a href="javascript:void(0);" data-id="{$vo.id}" data-field="status"
+                               data-value="{$vo.status}" data-url="{:url('edit', 'id='.$vo['id'])}">
+                                {if condition=" $vo.status == 1 "}
+                                <i class="layui-icon" style="color: #5FB878;font-size: 20px">&#xe616;</i>
+                                {else /}
+                                <i class="layui-icon" style="color: #FF5722;font-size: 22px">&#x1007;</i>
+                                {/if}
+                            </a>
+                        </td>
+                        <td>{$vo.sorts}</td>
+                        <td width="125">
+                            <a href="/admin/articlemod/edit?id={$vo.id}" class="layui-btn layui-btn-normal layui-btn-mini" >
+                                <i class="layui-icon">&#xe642;</i> 编辑
+                            </a>
+                            <a href="javascript:void(0);" data-id="{$vo.id}" data-url="/admin/articlemod/delete" class="layui-btn layui-btn-danger layui-btn-mini delete-one" >
+                                <i class="layui-icon">&#xe640;</i> 删除
+                            </a>
+                        </td>
+                    </tr>
+                    {/volist}
+
+                    </tbody>
+                </table>
+            </form>
+            <!--分页-->
+            <div id="lay-page-style"></div>
+            {//$dataList->render()}
+
+        </div>
+    </div>
+</div>
+
+<script type="application/javascript">
+    // 分页
+    layui.use(['laypage'], function() {
+        var laypage = layui.laypage;
+        //完整功能
+        laypage.render({
+            elem: 'lay-page-style'
+            ,count: {$data_count}
+            ,curr : {$page}
+            ,limit : {$curr}
+            ,layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
+            ,jump: function(obj, first){
+                var url = '?page='+obj.curr+'&curr='+obj.limit;//当前页url+分页参数
+                if(!first){  //跳转必须放在这个里边，不然无限刷新
+                    window.location.href = url; //跳转
+                }
+            }
+        });
+    })
+</script>
+{include file="public/footer" /}

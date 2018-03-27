@@ -1,0 +1,78 @@
+{include file="public/header" /}
+<body class="layui-layout-body">
+    <!-- 内容主体区域 -->
+        <div class="layui-row">
+            <div class="layui-col-xs12">
+                <div class="w_bg" style="padding: 15px">
+                    <a href="/admin/articleclassify/create" class="layui-btn">
+                        <i class="layui-icon">&#xe608;</i> 新增
+                    </a>
+                    <table class="layui-table" >
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>分类名称</th>
+                            <th>分类模型</th>
+                            <th>分类目录</th>
+                            <th>状态</th>
+                            <th>排序</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {volist name="dataList" id="vo"}
+                        <tr>
+                            <td>{$vo.id}</td>
+                            <td>
+                                {if condition=" $vo.h_layer eq 1 "}
+                                {else /}{for start="1" end="$vo.h_layer"}　　　{/for}├
+                                {/if}
+                                <span class="editable" data-pk="{$vo.id}" data-name="typename" data-url="{:url(CONTROLLER_NAME.'/edit', 'id='.$vo['id'])}" >{$vo.typename}</span>
+                            </td>
+                            <td>{$vo.Articlemod->name}</td>
+                            <td>
+                                <span class="editable" data-pk="{$vo.id}" data-name="dirs" data-url="{:url(CONTROLLER_NAME.'/edit', 'id='.$vo['id'])}" >{$vo.dirs}</span>
+                            </td>
+                            <td>
+                                <a href="javascript:void(0);" data-id="{$vo.id}" data-field="status"
+                                   data-value="{$vo.status}" data-url="{:url('edit', 'id='.$vo['id'])}">
+                                    {if condition=" $vo.status == 1 "}
+                                        <i class="layui-icon" style="color: #5FB878;font-size: 20px">&#xe616;</i>
+                                    {else /}
+                                        <i class="layui-icon" style="color: #FF5722;font-size: 22px">&#x1007;</i>
+                                    {/if}
+                                </a>
+                            </td>
+                            <td>{$vo.sorts}</td>
+                            <td align="center" width="300">
+
+                                <!--<button class="layui-btn layui-btn-mini">-->
+                                    <!--<i class="layui-icon">&#xe60a;</i> 预览-->
+                                <!--</button>-->
+                                {if condition=" $vo.mid == 20 || $vo.mid == 22 "}
+                                <button  class="layui-btn layui-btn-mini layui-btn-disabled">
+                                    <i class="layui-icon">&#xe61f;</i> 新增文章
+                                </button>
+                                {else/}
+                                <a href="/admin/articlelist/create/typeid/{$vo.id}" class="layui-btn layui-btn-mini">
+                                    <i class="layui-icon">&#xe61f;</i> 新增文章
+                                </a>
+                                {/if}
+
+                                <a href="/admin/articleclassify/edit/id/{$vo.id}" class="layui-btn layui-btn-mini">
+                                    <i class="layui-icon">&#xe642;</i> 编辑
+                                </a>
+                                <a href="javascript:void(0);" data-id="{$vo.id}" data-url="/admin/articleclassify/delete" class="layui-btn layui-btn-mini delete-one">
+                                    <i class="layui-icon">&#xe640;</i> 删除
+                                </a>
+
+                            </td>
+                        </tr>
+                        {/volist}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+{include file="public/footer" /}

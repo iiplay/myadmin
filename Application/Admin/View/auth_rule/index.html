@@ -1,0 +1,71 @@
+{include file="public/header" /}
+<!-- 内容主体区域 -->
+<div class="layui-row">
+    <div class="layui-col-xs12">
+        <div class="w_bg" style="padding: 15px">
+            <a href="{:url('create')}" class="layui-btn" >
+                <i class="layui-icon">&#xe608;</i> 新增
+            </a>
+            <form class="layui-form" action="">
+                <table class="layui-table" lay-skin="nob">
+                    <thead>
+                    <tr>
+                        <th>节点名称</th>
+                        <th>节点地址</th>
+                        <th>节点类型</th>
+                        <th>状态</th>
+                        <th>是否菜单</th>
+                        <th>节点图标</th>
+                        <th>排序</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {volist name="dataList" id="vo"}
+                    <tr>
+                        <td>
+                            {eq name="vo['level']" value="3"}　　　│　　　├{/eq}
+                            {eq name="vo['level']" value="2"}　　　├{/eq}
+                            <span class="editable" data-pk="{$vo.id}" data-name="title" data-url="{:url(CONTROLLER_NAME.'/edit', 'id='.$vo['id'])}" >{$vo.title}</span>
+                        </td>
+                        <td><span class="editable" data-pk="{$vo.id}" data-name="name" data-url="{:url(CONTROLLER_NAME.'/edit', 'id='.$vo['id'])}" >{$vo.name}</span></td>
+                        <td>{//$vo.level_turn}</td>
+                        <td>
+                            <a href="javascript:void(0);" data-id="{$vo.id}" data-field="status"
+                               data-value="{$vo.status}" data-url="{:url('edit', 'id='.$vo['id'])}">
+                                {if condition=" $vo.status == 1 "}
+                                <i class="layui-icon" style="color: #5FB878;font-size: 20px">&#xe616;</i>
+                                {else /}
+                                <i class="layui-icon" style="color: #FF5722;font-size: 22px">&#x1007;</i>
+                                {/if}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="javascript:void(0);" data-id="{$vo.id}" data-field="ismenu"
+                               data-value="{$vo.ismenu}" data-url="{:url('edit', 'id='.$vo['id'])}">
+                                {if condition=" $vo.ismenu == 1 "}
+                                <i class="layui-icon" style="color: #5FB878;font-size: 20px">&#xe616;</i>
+                                {else /}
+                                <i class="layui-icon" style="color: #FF5722;font-size: 22px">&#x1007;</i>
+                                {/if}
+                            </a>
+                        </td>
+                        <td align="center"><i class="{$vo.icon}"></td>
+                        <td>{$vo.sorts}</td>
+                        <td width="125">
+                            <a href="{:url('edit', 'id='.$vo['id'])}" class="layui-btn layui-btn-normal layui-btn-mini" >
+                                <i class="layui-icon">&#xe642;</i> 编辑
+                            </a>
+                            <a href="javascript:void(0);" data-id="{$vo.id}" data-url="{:url('delete')}" class="layui-btn layui-btn-danger layui-btn-mini delete-one" >
+                                <i class="layui-icon">&#xe640;</i> 删除
+                            </a>
+                        </td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}

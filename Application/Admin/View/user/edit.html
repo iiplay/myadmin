@@ -1,0 +1,301 @@
+{include file="public/header" /}
+<link rel="stylesheet" href="__JS__/cropper/cropper.css">
+<style>
+    .cropper-view-box,
+    .cropper-face {
+        border-radius: 50%;
+    }
+</style>
+<!-- 内容主体区域 -->
+<div class="layui-row">
+    <div class="layui-col-xs12">
+        <div class="w_bg" style="padding: 15px">
+                <!--选项卡-->
+                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this" style="background-color: #fff">基本参数</li>
+                        <li style="background-color: #fff">修改密码</li>
+                        <li style="background-color: #fff">修改头像</li>
+                        <li style="background-color: #fff">附加信息</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <!--第一个选项卡-->
+                        <div class="layui-tab-item layui-show">
+                            <form class="layui-form" method="POST" action="" onsubmit="return false" >
+                                <input type="hidden" name="id" value="{$data.id}" />
+                                <input type="hidden" name="actions" value="user" />
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">用户名</label>
+                                    <div class="layui-input-block">
+                                        <input type="text"  disabled="disabled" value="{$data.username}" required lay-verify="required"
+                                               placeholder="用户名" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">姓名</label>
+                                    <div class="layui-input-block">
+                                        <input type="text"  name="name" value="{$data.name}" required lay-verify="required"
+                                               placeholder="姓名" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">邮箱</label>
+                                    <div class="layui-input-block">
+                                        <input type="text"  name="email" value="{$data.email}" required lay-verify="required"
+                                               placeholder="邮箱" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">手机号码</label>
+                                    <div class="layui-input-block">
+                                        <input type="text"  name="moblie" value="{$data.moblie}" required lay-verify="required"
+                                               placeholder="手机号码" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">性别</label>
+                                    <div class="layui-input-block">
+                                        <select name="sex" lay-verify="required">
+                                            <option value="1" {if condition="$data.sex eq '1'"}selected="selected"{/if} >男</option>
+                                            <option value="0" {if condition="$data.sex eq '0'"}selected="selected"{/if} >女</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">状态</label>
+                                    <div class="layui-input-block">
+                                        <select name="status" lay-verify="required">
+                                            <option value="1" {if condition="$data.status eq '1'"}selected="selected"{/if} >在用</option>
+                                            <option value="0" {if condition="$data.status eq '0'"}selected="selected"{/if} >停用</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn submits" lay-submit lay-filter="formDemo">提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary">撤销</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!--第二个选项卡-->
+                        <div class="layui-tab-item">
+                            <form class="layui-form" method="POST" action="" onsubmit="return false" >
+                                <input type="hidden" name="id" value="{$data.id}" />
+                                <input type="hidden" name="actions" value="password" />
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">旧密码</label>
+                                    <div class="layui-input-block">
+                                        <input type="password"  name="oldpassword" value="" required lay-verify="required"
+                                               placeholder="旧密码" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">新密码</label>
+                                    <div class="layui-input-block">
+                                        <input type="password"  name="password" value="" required lay-verify="required"
+                                               placeholder="新密码" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">确认密码</label>
+                                    <div class="layui-input-block">
+                                        <input type="password"  name="repassword" value="" required lay-verify="required"
+                                               placeholder="确认密码" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn submits" lay-submit lay-filter="formDemo">提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary">撤销</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!--第3个选项卡-->
+                        <div class="layui-tab-item">
+                            <form class="layui-form" action="" method="post" onsubmit="return false">
+                                <input type="hidden" name="id" value="{$data.id}" />
+                                <input type="hidden" name="actions" value="avatar" />
+                                <div style="float: left">修改头像</div>
+                                <div id="avatar-box" style="float: left;padding-left: 15px">
+                                    <div id="crop-avatar">
+                                        <div class="avatar-view" title="点击修改头像">
+                                            <img src="{$data.userInfo.avatar}" alt="avatar">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="clear: both"></div>
+                            </form>
+                        </div>
+                        <!--第4个选项卡-->
+                        <div class="layui-tab-item">
+                            <form class="layui-form" action="" method="post" onsubmit="return false">
+                                <input type="hidden" name="id" value="{$data.id}" />
+                                <input type="hidden" name="actions" value="infos" />
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">QQ</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="qq" value="{$data.userInfo.qq}" required lay-verify="required"
+                                           placeholder="QQ" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">生日</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="birthday" value="{$data.userInfo.birthday_turn}" required lay-verify="required"
+                                           id="createdate" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">用户信息</label>
+                                <div class="layui-input-block">
+                                    <!--编辑器-->
+                                    {include file="public/UEditor" /}
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn submits" lay-submit lay-filter="formDemo">提交</button>
+                                    <button type="reset" class="layui-btn layui-btn-primary">撤销</button>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+<div id="layer_box" style="display: none">
+    <form class="avatar-form" action="{:url('Uploads/cropper')}?dir=avatar" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="id" value="{$data.id}" />
+        <input type="hidden" name="actions" value="avatar" />
+        <div style="padding: 15px">
+            <div style="font-size: 16px;font-weight: bold;margin-bottom: 10px">图片大小限制在2.0M</div>
+            <div style="padding-bottom: 10px">
+                <input class="avatar-src" name="avatar_src" type="hidden">
+                <input class="avatar-data" name="avatar_data" type="hidden">
+                <label for="avatarInput">图片上传</label>
+                <input class="avatar-input" id="avatarInput" name="avatar_file" type="file">
+            </div>
+            <div style="float: left">
+                <img id="image" src="__IMAGES__/401.gif" alt="Picture">
+            </div>
+            <div style="float: left;margin-left: 20px">
+                <div class="preview"></div>
+            </div>
+            <div style="clear: both;padding-top: 10px">
+                <button data-method="rotate" data-option="90" class="layui-btn rotate_1" type="button">
+                    <i class="layui-icon">&#xe603;</i> 向左旋转
+                </button>
+                <button class="layui-btn rotate_2" type="button">
+                    <i class="layui-icon">&#xe602;</i> 向右旋转
+                </button>
+                <button class="layui-btn layui-btn-normal" type="submit">
+                    <i class="layui-icon">&#xe621;</i> 保存修改
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="__JS__/cropper/cropper.js"></script>
+<script>
+    $(function() {
+        layui.use(['laydate','layer'], function(){
+            var laydate = layui.laydate
+                ,layer = layui.layer;
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#createdate' //指定元素
+                ,type: 'date'
+            });
+            $('.avatar-view').click(function () {
+                $('#image').attr('src','{$data.userInfo.avatar}');
+
+                layer.open({
+                    title: '',
+                    type: 1,
+                    area: ['800px', '550'], //宽高
+                    content: $('#layer_box')
+                });
+
+            });
+        });
+
+        var $previews = $('.preview');
+        var rote = 0;
+        $('#image').cropper({
+            aspectRatio: 1,
+            viewMode: 1,
+            dragMode: 'move',
+            restore: false,
+            guides: true,
+            highlight: false,
+            cropBoxMovable: false,
+            cropBoxResizable: false,
+            minContainerWidth:600,
+            minContainerHeight:400,
+            ready: function (e) {
+                        var $clone = $(this).clone().removeClass('cropper-hidden');
+                        $clone.css({
+                            display: 'block',
+                            width: '100%',
+                            minWidth: 0,
+                            minHeight: 0,
+                            maxWidth: 'none',
+                            maxHeight: 'none'
+                        });
+
+                        $previews.css({
+                            width: '100px',
+                            overflow: 'hidden'
+                        }).html($clone);
+
+                $('.rotate_1').click(function () {
+                    $('#image').cropper('rotate', -90);
+                });
+                $('.rotate_2').click(function () {
+                    $('#image').cropper('rotate', 90)
+                });
+            },
+                    crop: function (e) {
+                        var imageData = $(this).cropper('getImageData');
+                        var previewAspectRatio = e.width / e.height;
+
+                        $previews.each(function () {
+                            var $preview = $(this);
+                            var previewWidth = $preview.width();
+                            var previewHeight = previewWidth / previewAspectRatio;
+                            var imageScaledRatio = e.width / previewWidth;
+
+                            $preview.height(previewHeight).find('img').css({
+                                width: imageData.naturalWidth / imageScaledRatio,
+                                height: imageData.naturalHeight / imageScaledRatio,
+                                marginLeft: -e.x / imageScaledRatio,
+                                marginTop: -e.y / imageScaledRatio
+                            });
+
+                            if(e.rotate == 90 || e.rotate == 270){
+                                $preview.width(previewHeight).find('img').css({
+                                    width: imageData.naturalWidth / imageScaledRatio,
+                                    height: imageData.naturalHeight / imageScaledRatio,
+                                    marginLeft: -e.x / imageScaledRatio,
+                                    marginTop: -e.y / imageScaledRatio
+                                });
+                            }
+
+                            $preview.height(previewHeight).find('img').css("transform","rotate("+e.rotate+"deg)");
+
+                            rote = e.rotate;
+                        });
+
+                        $('.avatar-data').val(e);
+
+                    }
+        });
+    })
+
+</script>
+{include file="public/footer" /}

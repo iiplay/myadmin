@@ -1,0 +1,94 @@
+{include file="public/header" /}
+<!-- 内容主体区域 -->
+<div class="layui-row">
+    <div class="layui-col-xs12">
+        <div class="w_bg" style="padding: 15px">
+            <!--选项卡-->
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this" style="background-color: #fff">基本参数</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <form class="layui-form" method="POST" action="" onsubmit="return false" >
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">父级节点</label>
+                                <div class="layui-input-block">
+                                    <select name="pid" lay-verify="">
+                                        <option value="0">顶级分类</option>
+                                        {volist name="treeList" id="vo"}
+                                        <option value="{$vo.id}" {if condition="$vo.level eq '3'"}disabled="disabled"{/if} {if condition="$data.pid eq $vo.id"}selected="selected"{/if} {if condition="$data.id eq $vo.id"}disabled="disabled"{/if} >
+                                        {eq name="vo.level" value="3"}　　│　　├{/eq}
+                                        {eq name="vo.level" value="2"}　　├{/eq}
+                                        {$vo.title}
+                                        </option>
+                                        {/volist}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">节点名称</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" value="{$data.title}" placeholder="节点名称" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">节点地址</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="name" value="{$data.name}" placeholder="节点地址" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">节点类型</label>
+                                <div class="layui-input-block">
+                                    <select name="level" lay-verify="">
+                                        <option value="1" {if condition="$data.level eq '1'"}selected="selected"{/if} >项目</option>
+                                        <option value="2" {if condition="$data.level eq '2'"}selected="selected"{/if} >模块</option>
+                                        <option value="3" {if condition="$data.level eq '3'"}selected="selected"{/if} >操作</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">状态</label>
+                                <div class="layui-input-block">
+                                    <select name="status" lay-verify="">
+                                        <option {if condition="$data.status eq '1'"}selected="selected"{/if} value="1">在用</option>
+                                        <option {if condition="$data.status eq '0'"}selected="selected"{/if} value="0">停用</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">是否菜单</label>
+                                <div class="layui-input-block">
+                                    <select name="ismenu" lay-verify="">
+                                        <option {if condition="$data.ismenu eq '1'"}selected="selected"{/if} value="1">是</option>
+                                        <option {if condition="$data.ismenu eq '0'"}selected="selected"{/if} value="0">否</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">节点图标</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="icon" value="{$data.icon}" placeholder="节点图标" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">排序</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="sorts" value="{$data.sorts}"  placeholder="排序" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button type="submit" class="layui-btn submits" lay-submit lay-filter="formDemo">立即提交</button>
+                                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}

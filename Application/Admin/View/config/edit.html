@@ -1,0 +1,87 @@
+{include file="public/header" /}
+<!-- 内容主体区域 -->
+<div class="layui-row">
+    <div class="layui-col-xs12">
+        <div class="w_bg" style="padding: 15px">
+            <!--选项卡-->
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this" style="background-color: #fff">基本参数</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <form class="layui-form" method="POST" action="" onsubmit="return false">
+                            <input type="hidden" name="id" value="{$data.id}" />
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">键</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="k" value="{$data.k}"  placeholder="键" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">值</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="v" value="{$data.v}"  placeholder="值" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">类型</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="type" value="{$data.type}"  placeholder="类型" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">描述</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="desc" value="{$data.desc}"  placeholder="描述" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">文本框提示</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="prompt" value="{$data.prompt}"  placeholder="文本框提示" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">排序</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="sorts" value="{$data.sorts|default='50'}"  placeholder="排序" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">文本类型</label>
+                                <div class="layui-input-block">
+                                    <select name="texttype">
+                                        <option value="text" {if condition="$data.texttype eq 'text'"}selected="selected"{/if} >text</option>
+                                        <option value="textarea" {if condition="$data.texttype eq 'textarea'"}selected="selected"{/if} >textarea</option>
+                                        <option value="select" {if condition="$data.texttype eq 'select'"}selected="selected"{/if} >select</option>
+                                        <option value="image" {if condition="$data.texttype eq 'image'"}selected="selected"{/if} >image</option>
+                                        <option value="file" {if condition="$data.texttype eq 'file'"}selected="selected"{/if} >file</option>
+                                        <option value="flash" {if condition="$data.texttype eq 'flash'"}selected="selected"{/if} >flash</option>
+                                        <option value="media" {if condition="$data.texttype eq 'media'"}selected="selected"{/if} >media</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">状态</label>
+                                <div class="layui-input-block">
+                                    <select name="status" lay-verify="required">
+                                        <option value="1" {if condition="$data.status eq '1'"}selected="selected"{/if} >在用</option>
+                                        <option value="0" {if condition="$data.status eq '0'"}selected="selected"{/if} >停用</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button type="submit" class="layui-btn submits" lay-submit lay-filter="formDemo">立即提交</button>
+                                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}

@@ -1,0 +1,46 @@
+{include file="public/header" /}
+<!-- 内容主体区域 -->
+<div class="layui-row">
+    <div class="layui-col-xs12">
+        <div class="w_bg" style="padding: 15px">
+            <button data-url="/admin/database/backup" class="layui-btn delete-all">
+                <i class="layui-icon">&#xe608;</i> 备份数据库
+            </button>
+            <form class="layui-form" action="" method="post" onsubmit="return false">
+                <table class="layui-table" >
+                    <colgroup>
+                        <col width="50">
+                        <col width="200">
+                        <col width="150">
+                        <col width="200">
+                        <col>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th><input type="checkbox" lay-filter="allChoose" lay-skin="primary"></th>
+                        <th>序号</th>
+                        <th>表名</th>
+                        <th>数据条数</th>
+                        <th>类型</th>
+                        <th>创建时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {volist name="dataList" id="vo"}
+                    <tr>
+                        <td><input type="checkbox" name="id[]" value="{$vo.Name}" class="minimal" lay-skin="primary"></td>
+                        <td>{$i}</td>
+                        <td><span class="layui-badge">{$vo.Name}</span></td>
+                        <td><span class="layui-badge layui-bg-green">{$vo.Rows}</span> 条记录</td>
+                        <td>{$vo.Engine}</td>
+                        <td>{$vo.Create_time}</td>
+                    </tr>
+                    {/volist}
+
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}

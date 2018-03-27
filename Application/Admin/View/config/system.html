@@ -1,0 +1,71 @@
+{include file="public/header" /}
+<!-- 内容主体区域 -->
+<div class="layui-row">
+    <div class="layui-col-xs12">
+        <div class="w_bg" style="padding: 15px">
+            <!--选项卡-->
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this" style="background-color: #fff">基本参数</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <form class="layui-form" method="POST" action="/admin/config/save" onsubmit="return false">
+                            <input type="hidden" name="type" value="{$type}" />
+                            {volist name="data" id="vo"}
+                            {if condition="$vo.texttype eq 'textarea'"}
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">{$vo.desc}</label>
+                                <div class="layui-input-block">
+                                    <textarea name="{$vo.k}" placeholder="{$vo.prompt}" class="layui-textarea">{$vo.v}</textarea>
+                                </div>
+                            </div>
+                            {elseif condition="$vo.texttype eq 'select'"/}
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">{$vo.desc}</label>
+                                <div class="layui-input-block">
+                                    <select name="{$vo.k}" lay-verify="required">
+                                        <option {if condition="$vo.v eq '1'"}selected="selected"{/if} value="0">是</option>
+                                        <option {if condition="$vo.v eq '0'"}selected="selected"{/if} value="1">否</option>
+                                    </select>
+                                </div>
+                            </div>
+                            {elseif condition="$vo.texttype eq 'image' || $vo.texttype eq 'file' || $vo.texttype eq 'flash' || $vo.texttype eq 'media'"/}
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">{$vo.desc}</label>
+                                <div class="layui-input-inline" style="width: 300px">
+                                    <input type="text" name="litpic" value="{$data.litpic}"
+                                           placeholder="缩略图" autocomplete="off" class="layui-input">
+                                </div>
+                                <div class="layui-word-aux">
+                                    <a href="{$data.litpic|default='__IMAGES__/no-image.png'}" target="_blank" >
+                                        <img src="{$data.litpic|default='__IMAGES__/no-image.png'}" style="height:38px; width:68px;" />
+                                    </a>
+                                    <button data-url="{:url('Uploads/upload')}?dir=image" class="layui-btn layui-btn-small up-btn" type="button" style="height: 38px">
+                                        <i class="layui-icon">&#xe608;</i> 上传
+                                    </button>
+                                </div>
+                            </div>
+                            {else /}
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">{$vo.desc}</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="{$vo.k}" value="{$vo.v}" placeholder="{$vo.prompt}" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            {/if}
+                            {/volist}
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn submits" lay-submit lay-filter="formDemo">提交</button>
+                                    <button type="reset" class="layui-btn layui-btn-primary">撤销</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}

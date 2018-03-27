@@ -1,0 +1,53 @@
+{include file="public/header" /}
+<!-- 内容主体区域 -->
+<div class="layui-row">
+    <div class="layui-col-xs12">
+        <div class="w_bg" style="padding: 15px">
+            <button data-url="/admin/login_log/delete" class="layui-btn layui-btn-danger delete-all">
+                <i class="layui-icon">&#xe640;</i> 删除
+            </button>
+            <form class="layui-form" action="" method="post" onsubmit="return false">
+            <table class="layui-table" >
+                <thead>
+                <tr>
+                    <th><input type="checkbox" lay-filter="allChoose" lay-skin="primary"></th>
+                    <th>ID</th>
+                    <th>IP</th>
+                    <th>登录用户</th>
+                    <th>国家</th>
+                    <th>省</th>
+                    <th>城市</th>
+                    <th>区</th>
+                    <th>创建时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name="dataList" id="vo"}
+                <tr>
+                    <td><input type="checkbox" name="id[]" value="{$vo.id}" class="minimal" lay-skin="primary"></td>
+                    <td>{$vo.id}</td>
+                    <td><span class="layui-badge layui-bg-green">{$vo.ip}</span></td>
+                    <td>{$vo->User->username} / {$vo->User->name}</td>
+                    <td>{$vo.country}</td>
+                    <td>{$vo.province}</td>
+                    <td>{$vo.city}</td>
+                    <td>{$vo.district}</td>
+                    <td>{$vo.create_time}</td>
+                    <td>
+                        <button data-id="{$vo.id}" data-url="/admin/login_log/delete" class="layui-btn layui-btn-danger layui-btn-mini delete-one">
+                            <i class="layui-icon">&#xe640;</i> 删除
+                        </button>
+                    </td>
+
+                </tr>
+                {/volist}
+
+                </tbody>
+            </table>
+            </form>
+
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}

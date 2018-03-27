@@ -1,0 +1,65 @@
+{include file="public/header" /}
+<!-- 内容主体区域 -->
+<div class="layui-row">
+    <div class="layui-col-xs12">
+        <div class="w_bg" style="padding: 15px">
+            <a href="/admin/config/create" class="layui-btn">
+                <i class="layui-icon">&#xe608;</i> 新增
+            </a>
+            <button class="layui-btn delete-all" data-url="/admin/config/delete">
+                <i class="layui-icon">&#xe608;</i> 删除
+            </button>
+            <form class="layui-form" action="" method="post" onsubmit="return false">
+                <table class="layui-table" >
+                    <thead>
+                    <tr>
+                        <th><input type="checkbox" lay-filter="allChoose" lay-skin="primary"></th>
+                        <th>ID</th>
+                        <th>键</th>
+                        <th>值</th>
+                        <th>描述</th>
+                        <th>类型</th>
+                        <th>文本类型</th>
+                        <th>排序</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {volist name="dataList" id="vo"}
+                    <tr>
+                        <td><input type="checkbox" name="id[]" value="{$vo.id}" class="minimal" lay-skin="primary"></td>
+                        <td>{$vo.id}</td>
+                        <td><span class="editable" data-pk="{$vo.id}" data-name="k" data-url="{:url(CONTROLLER_NAME.'/edit', 'id='.$vo['id'])}" >{$vo.k}</span></td>
+                        <td><span class="editable" data-pk="{$vo.id}" data-name="v" data-url="{:url(CONTROLLER_NAME.'/edit', 'id='.$vo['id'])}" >{$vo.v}</span></td>
+                        <td><span class="editable" data-pk="{$vo.id}" data-name="desc" data-url="{:url(CONTROLLER_NAME.'/edit', 'id='.$vo['id'])}" >{$vo.desc}</span></td>
+                        <td><span class="editable" data-pk="{$vo.id}" data-name="type" data-url="{:url(CONTROLLER_NAME.'/edit', 'id='.$vo['id'])}" >{$vo.type}</span></td>
+                        <td>{$vo.texttype}</td>
+                        <td>{$vo.sorts}</td>
+                        <td>
+                            <a href="javascript:void(0);" data-id="{$vo.id}" data-field="status"
+                               data-value="{$vo.status}" data-url="{:url('edit', 'id='.$vo['id'])}">
+                                {if condition=" $vo.status == 1 "}
+                                <i class="layui-icon" style="color: #5FB878;font-size: 20px">&#xe616;</i>
+                                {else /}
+                                <i class="layui-icon" style="color: #FF5722;font-size: 22px">&#x1007;</i>
+                                {/if}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/admin/config/edit/id/{$vo.id}" class="layui-btn layui-btn-mini">
+                                <i class="layui-icon">&#xe642;</i> 编辑
+                            </a>
+                            <button data-id="{$vo.id}" data-url="/admin/config/delete" class="layui-btn layui-btn-mini delete-one">
+                                <i class="layui-icon">&#xe640;</i> 删除
+                            </button>
+                        </td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}

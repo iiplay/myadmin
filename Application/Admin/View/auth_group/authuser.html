@@ -1,0 +1,73 @@
+{include file="public/header" /}
+<!-- 内容主体区域 -->
+<div class="layui-row">
+    <div class="layui-col-xs12">
+        <div class="w_bg" style="padding: 15px">
+            <!--选项卡-->
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this" style="background-color: #fff">授权用户</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show" style="height: 430px">
+                        <form class="layui-form" method="POST" action="" onsubmit="return false" >
+                        <div class="layui-col-md5">
+                            <h1>未授权用户</h1>
+                            <select lay-ignore name="userid[]" id="search" style="width: 100%;height: 350px;border: 1px #e6e6e6 solid" size="15" multiple="multiple">
+                                {volist name="userList" id="vo"}
+                                <option value="{$vo.id}">【{$vo.username}】 {$vo.name}</option>
+                                {/volist}
+                            </select>
+                        </div>
+                        <div class="layui-col-md2">
+                            <div class="layui-col-md10" style="float: none;margin: auto">
+                                <button id="search_rightAll" class="layui-btn layui-btn-sm" style="width: 100%;margin-top: 20px">
+                                    <i class="layui-icon">&#xe65b;</i>
+                                </button>
+
+                                <button id="search_rightSelected" class="layui-btn layui-btn-sm" style="width: 100%;margin-left: 0;margin-top: 20px" >
+                                    <i class="layui-icon">&#xe602;</i>
+                                </button>
+
+                                <button id="search_leftSelected" class="layui-btn layui-btn-sm" style="width: 100%;margin-left: 0;margin-top: 20px">
+                                    <i class="layui-icon">&#xe603;</i>
+                                </button>
+                                <button id="search_leftAll" class="layui-btn layui-btn-sm" style="width: 100%;margin-left: 0;margin-top: 20px">
+                                    <i class="layui-icon">&#xe65a;</i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="layui-col-md5">
+                            <h1>已授权用户</h1>
+                            <select lay-ignore name="uid[]" id="search_to" style="width: 100%;height: 350px;border: 1px #e6e6e6 solid" size="15" multiple="multiple">
+                                {volist name="authList" id="vo"}
+                                <option value="{$vo.id}">【{$vo.username}】 {$vo.name}</option>
+                                {/volist}
+                            </select>
+                        </div>
+                        <div class="layui-form-item">
+                             <button style="display: block;margin: auto;" class="layui-btn submits" lay-submit lay-filter="formDemo">提交</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="__JS__/multiselect.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('#search').multiselect({
+            search: {
+                left: '<input type="text" class="layui-input" placeholder="Search..." />',
+                right: '<input type="text" class="layui-input" placeholder="Search..." />',
+            },
+            keepOrder: true,
+            fireSearch: function(value) {
+                return value.length > 0;   //搜索字符长度
+            }
+        });
+        })
+</script>
+{include file="public/footer" /}

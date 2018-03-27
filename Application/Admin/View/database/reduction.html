@@ -1,0 +1,52 @@
+{include file="public/header" /}
+<!-- 内容主体区域 -->
+<div class="layui-row">
+    <div class="layui-col-xs12">
+        <div class="w_bg" style="padding: 15px">
+            <table class="layui-table" lay-skin="nob">
+                <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col width="200">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>备份序号</th>
+                    <th>备份名称</th>
+                    <th>备份时间</th>
+                    <th>备份大小</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name="dataList" id="vo"}
+                <tr>
+                    <td>{$i}</td>
+                    <td>{$vo.name}</td>
+                    <td>{$vo.time}</td>
+                    <td>{$vo.size}</td>
+                    <td>
+                        <a href="/admin/database/dowonload/table/{$vo.name}">
+                            <button class="layui-btn layui-btn-mini layui-btn-warm" style="margin-left: 0">
+                                <i class="layui-icon">&#xe61e;</i> 下载
+                            </button>
+                        </a>
+                        <button data-id="{$vo.name}" data-url="/admin/database/restore" class="layui-btn layui-btn-mini layui-btn-normal delete-one" style="margin-left: 0">
+                            <i class="layui-icon">&#xe633;</i> 还原
+                        </button>
+                        <button data-id="{$vo.name}" data-url="/admin/database/delete" class="layui-btn layui-btn-mini layui-btn-danger delete-one" style="margin-left: 0">
+                            <i class="layui-icon">&#xe640;</i> 删除
+                        </button>
+                    </td>
+                </tr>
+                {/volist}
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}

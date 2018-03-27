@@ -1,0 +1,237 @@
+{include file="public/header" /}
+<body class="layui-layout-body">
+<!--图表插件-->
+<script src="__JS__/echarts.common.min.js"></script>
+<!--main-->
+<div class="layui-row layui-col-space10">
+    <div class="layui-col-md3">
+        <div class="grid-demo grid-demo-bg1">用户数</div>
+    </div>
+    <div class="layui-col-md3">
+        <div class="grid-demo grid-demo-bg1">文章数</div>
+    </div>
+    <div class="layui-col-md3">
+        <div class="grid-demo grid-demo-bg1">最近一周注册用户</div>
+    </div>
+    <div class="layui-col-md3">
+        <div class="grid-demo grid-demo-bg1">最近一周留言数</div>
+    </div>
+</div>
+<div class="fi-top"></div>
+
+<div class="layui-row layui-col-space30">
+    <div class="layui-col-md6" >
+        <div class="w_line"></div>
+        <div class="w_bg">
+            <h3 class="box_title">最近一周留言数</h3>
+            <div id="tu_z" style="height: 312px;margin-top: 10px"></div>
+        </div>
+
+    </div>
+    <div class="layui-col-md6" >
+        <div class="w_line"></div>
+        <div class="w_bg">
+            <h3 class="box_title">最新登录</h3>
+            <div style="height: 312px">
+                <table  class="layui-table" lay-skin="nob">
+                    <tr>
+                        <th>IP</th>
+                        <th>位置</th>
+                        <th>登录时间</th>
+                    </tr>
+                    <tr>
+                        <td><span class="layui-badge layui-bg-blue">贤心</span></td>
+                        <td>2016-11-29</td>
+                        <td>人生就像是一场修行</td>
+                    </tr>
+                    <tr>
+                        <td><span class="layui-badge layui-bg-blue">贤心</span></td>
+                        <td>2016-11-29</td>
+                        <td>人生就像是一场修行</td>
+                    </tr>
+                    <tr>
+                        <td><span class="layui-badge layui-bg-blue">贤心</span></td>
+                        <td>2016-11-29</td>
+                        <td>人生就像是一场修行</td>
+                    </tr>
+                    <tr>
+                        <td><span class="layui-badge layui-bg-blue">贤心</span></td>
+                        <td>2016-11-29</td>
+                        <td>人生就像是一场修行</td>
+                    </tr>
+                    <tr>
+                        <td><span class="layui-badge layui-bg-blue">贤心</span></td>
+                        <td>2016-11-29</td>
+                        <td>人生就像是一场修行</td>
+                    </tr>
+                    <tr>
+                        <td><span class="layui-badge layui-bg-blue">贤心</span></td>
+                        <td>2016-11-29</td>
+                        <td>人生就像是一场修行</td>
+                    </tr>
+                    <tr>
+                        <td><span class="layui-badge layui-bg-blue">贤心</span></td>
+                        <td>2016-11-29</td>
+                        <td>人生就像是一场修行</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="layui-row layui-col-space30">
+    <div class="layui-col-md3" >
+        <div class="w_line"></div>
+        <div class="w_bg">
+            <h3 class="box_title">用户组</h3>
+            <div id="pie_box" style="height: 342px;margin-top: 10px"></div>
+        </div>
+
+    </div>
+    <div class="layui-col-md5" >
+        <div class="w_line"></div>
+        <div class="w_bg">
+            <h3 class="box_title">系统配置</h3>
+            <div style="margin-top: 10px">
+                <ul class="box_ul">
+                    {volist name="systemConfig" id="vo" }
+                    <li>{$key}：{$vo}</li>
+                    {/volist}
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="layui-col-md4" >
+        <div class="w_line"></div>
+        <div class="w_bg">
+            <h3 class="box_title">系统反馈</h3>
+            <div style="height: 280px;margin-top: 10px">
+                <div class="layui-col-md11" style="margin: auto">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">输入框</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">输入框</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">文本域</label>
+                        <div class="layui-input-block">
+                            <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn layui-btn-mini" lay-submit lay-filter="formDemo">立即提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary layui-btn-mini">重置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例 折线图
+    var myChart = echarts.init(document.getElementById('tu_z'));
+
+    data = [["2000-06-05",116],["2000-06-06",129],["2000-06-07",135],["2000-06-08",86],["2000-06-09",73],["2000-06-10",85],["2000-06-11",73],["2000-06-12",68],["2000-06-13",92],["2000-06-14",130],["2000-06-15",245],["2000-06-16",139],["2000-06-17",115],["2000-06-18",111],["2000-06-19",309],["2000-06-20",206],["2000-06-21",137],["2000-06-22",128],["2000-06-23",85],["2000-06-24",94],["2000-06-25",71],["2000-06-26",106],["2000-06-27",84],["2000-06-28",93],["2000-06-29",85],["2000-06-30",73],["2000-07-01",83],["2000-07-02",125],["2000-07-03",107],["2000-07-04",82],["2000-07-05",44],["2000-07-06",72],["2000-07-07",106],["2000-07-08",107],["2000-07-09",66],["2000-07-10",91],["2000-07-11",92],["2000-07-12",113],["2000-07-13",107],["2000-07-14",131],["2000-07-15",111],["2000-07-16",64],["2000-07-17",69],["2000-07-18",88],["2000-07-19",77],["2000-07-20",83],["2000-07-21",111],["2000-07-22",57],["2000-07-23",55],["2000-07-24",60]];
+
+    var dateList = data.map(function (item) {
+        return item[0];
+    });
+    var valueList = data.map(function (item) {
+        return item[1];
+    });
+    // 指定图表的配置项和数据
+    option = {
+        backgroundColor: '#fff',//背景色
+        // Make gradient line here
+        visualMap: {
+            show: false,
+            type: 'continuous',
+            seriesIndex: 0,
+            min: 0,
+            max: 400
+        },
+
+        title: {
+            left: 'center',
+            text: 'Gradient along the y axis'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        xAxis: {
+            data: dateList
+        },
+        yAxis: {
+            splitLine: {show: false}
+        },
+        series: {
+            type: 'line',
+            showSymbol: false,
+            data: valueList
+        }
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+    window.onresize = myChart.resize;
+    // 基于准备好的dom，初始化echarts实例 饼图
+    var pieChart = echarts.init(document.getElementById('pie_box'));
+    pieChart.setOption({
+        title: {
+            text: '天气情况统计',
+            subtext: '虚构数据',
+            left: 'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            // orient: 'vertical',
+            // top: 'middle',
+            bottom: 10,
+            left: 'center',
+            data: ['西凉', '益州','兖州','荆州','幽州']
+        },
+        series : [
+            {
+                type: 'pie',
+                radius : '50%',
+                center: ['50%', '50%'],
+                selectedMode: 'single',
+                data:[
+                    {value:1548,name: '幽州'},
+                    {value:535, name: '荆州'},
+                    {value:510, name: '兖州'},
+                    {value:634, name: '益州'},
+                    {value:735, name: '西凉'}
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    })
+    //    window.onresize = pieChart.resize;
+
+
+</script>
+{include file="public/footer" /}

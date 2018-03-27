@@ -1,0 +1,102 @@
+{include file="public/header" /}
+<!-- 内容主体区域 -->
+<div class="layui-row">
+    <div class="layui-col-xs12">
+        <div class="w_bg" style="padding: 15px">
+            <!--选项卡-->
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this" style="background-color: #fff">基本参数</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <form class="layui-form" method="POST" action="" onsubmit="return false">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">角色名称</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" value="{$data.title}"  placeholder="角色名称" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">角色等级</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="level" value="{$data.level}" placeholder="角色等级" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">角色描述</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="notation" value="{$data.notation}"  placeholder="角色描述" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">角色图标</label>
+                                <div class="layui-input-inline" style="width: 300px">
+                                    <input type="text" name="pic" value="{$data.pic}"
+                                           placeholder="角色图标" autocomplete="off" class="layui-input">
+                                </div>
+                                <div class="layui-word-aux">
+                                    <a href="{$data.litpic|default='__IMAGES__/no-image.png'}" target="_blank" >
+                                        <img src="{$data.litpic|default='__IMAGES__/no-image.png'}" style="height:38px; width:68px;" />
+                                    </a>
+                                    <button data-url="{:url('Uploads/upload')}?dir=image" class="layui-btn layui-btn-small up-btn" type="button" style="height: 38px">
+                                        <i class="layui-icon">&#xe608;</i> 上传
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">推荐显示</label>
+                                <div class="layui-input-block">
+                                    <select name="recom" lay-verify="required">
+                                        <option value="0" {if condition="$data.recom eq '0'"}selected="selected"{/if} >否</option>
+                                        <option value="1" {if condition="$data.recom eq '0'"}selected="selected"{/if} >是</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">所属模块</label>
+                                <div class="layui-input-block">
+                                    <select name="module" lay-verify="required">
+                                        <option value="admin" {if condition="$data.module eq 'admin'"}selected="selected"{/if} >后台管理员</option>
+                                        <option value="member" {if condition="$data.module eq 'member'"}selected="selected"{/if} >前台会员</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">状态</label>
+                                <div class="layui-input-block">
+                                    <select name="status" lay-verify="required">
+                                        <option value="1" {if condition="$data.status eq '1'"}selected="selected"{/if} >在用</option>
+                                        <option value="0" {if condition="$data.status eq '0'"}selected="selected"{/if} >停用</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">角色授权</label>
+                                <div class="layui-input-block">
+                                    {volist name="authRuleTree" id="rule_list"}
+                                    {if condition="$rule_list.level eq 1"}
+                                        <br>
+                                    {elseif condition="$rule_list.level eq 2" /}
+                                        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    {/if}
+                                        <input type="checkbox" name="rules[]" value="{$rule_list.id}"
+                                               {if condition="isset($rule_list.ischeck) &&$rule_list.ischeck eq 'y'"}checked="checked"{/if}
+                                        title="{$rule_list.title}" lay-skin="primary" >
+                                    {/volist}
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn submits" lay-submit lay-filter="formDemo">提交</button>
+                                    <button type="reset" class="layui-btn layui-btn-primary">撤销</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}

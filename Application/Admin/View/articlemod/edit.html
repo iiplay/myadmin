@@ -1,0 +1,47 @@
+{include file="public/header" /}
+<!-- 内容主体区域 -->
+<div class="layui-row">
+    <div class="layui-col-xs12">
+        <div class="w_bg" style="padding: 15px">
+            <form class="layui-form" method="POST" action="" onsubmit="return false">
+                <input type="hidden" name="id" value="{$data.id}" />
+                <div class="layui-form-item">
+                    <label class="layui-form-label">文章模型名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="name" value="{$data.name}" placeholder="文章模型名称" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">文章模型操作</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="mod" value="{$data.mod}" placeholder="文章模型操作" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">排序</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="sorts" value="{$data.sorts}"  placeholder="排序" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">状态</label>
+                    <div class="layui-input-block">
+                        <select name="status" lay-verify="">
+                            <option {if condition="$data.status eq '1'"}selected="selected"{/if} value="1">在用</option>
+                            <option {if condition="$data.status eq '0'"}selected="selected"{/if} value="0">停用</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button type="submit" class="layui-btn submits" lay-submit lay-filter="formDemo">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{include file="public/footer" /}

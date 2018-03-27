@@ -1,0 +1,139 @@
+/*登录页*/
+.login-page {
+    background: #000;
+}
+
+.login-box {
+    width: 360px;
+    position: fixed;
+    top: 14%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+.login-logo {
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 300;
+}
+
+.login-box-body, .register-box-body {
+    background: #999;
+    opacity: 0.8;
+    padding: 20px;
+    border-top: 0;
+    color: #666;
+}
+
+.login-box-msg {
+    margin: 0;
+    text-align: center;
+    padding: 0 20px 20px 20px;
+}
+
+/* 栅格示例 */
+.grid-demo {
+    padding: 10px;
+    line-height: 100px;
+    text-align: center;
+    background-color: #79C48C;
+    color: #fff;
+}
+
+.grid-demo-bg1 {
+    background-color: #63BA79;
+}
+
+.grid-demo-bg2 {
+    background-color: #49A761;
+}
+
+.grid-demo-bg3 {
+    background-color: #38814A;
+}
+
+.fi-top {
+    height: 15px
+}
+
+.w_bg {
+    background-color: #fff
+}
+
+.w_line {
+    width: 100%;
+    height: 3px;
+    background-color: #009688
+}
+
+.box_title {
+    padding-left: 15px;
+    padding-top: 5px;
+    font-size: 16px;
+}
+
+.box_ul {
+    padding-left: 15px;
+}
+
+.box_ul li {
+    height: 40px;
+    line-height: 40px
+}
+/*标签*/
+.layui-tab[lay-filter="top-tab"] .layui-tab-title li:first-child .layui-tab-close {
+    display: none
+}
+
+.layui-tab[lay-filter="top-tab"] .layui-tab-title {
+    float: left;
+    width: 100%
+}
+.layui-tab[lay-filter="top-tab"] .layui-tab-button {
+    position: absolute;
+    float: left;
+    right: 20px;
+    line-height: 40px
+}
+.margin_z{
+    margin-top: 0;
+}
+.layui-body {
+    overflow: hidden;
+    border-top: 5px solid #1AA094;
+    border-left: 2px solid #1AA094;
+}
+.layui-tab-title .layui-this {
+    background-color: #1AA094;
+    color: #fff;
+}
+/*头像*/
+.user-photo {
+    width: 200px;
+    height: 120px;
+    padding-top: 15px;
+    padding-bottom: 5px;
+}
+.user-photo a.img {
+    display: block;
+    width: 76px;
+    height: 76px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+.user-photo p {
+    display: block;
+    width: 100%;
+    height: 25px;
+    color: #ffffff;
+    text-align: center;
+    font-size: 12px;
+    white-space: nowrap;
+    line-height: 25px;
+    overflow: hidden;
+}
+.layui-tab-title .layui-this:after {
+    border: none;
+}
